@@ -9,14 +9,18 @@ if __name__ == "__main__":
     if len(sys.argv) == 2:
         port = int(sys.argv[1])
     else:
+        print("No port argument given")
         exit()
         
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind((HOST, port))
+    
     while True:
         data, addr = s.recvfrom(1024)
-        print(f"Connected by {addr}")
-        t = time.time()
-        s.sendto(int(t).to_bytes(4), addr)
+        t = time.time() + 2208988800
+        print(f"Recieved datagram from {addr}, send time: {t!r}")
+        # encode the data into integer
+        data = int(t).to_bytes(4)
+        s.sendto(data, addr)
 
 

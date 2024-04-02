@@ -9,12 +9,16 @@ if __name__ == "__main__":
         host = sys.argv[1]
         port = int(sys.argv[2])
     else:
+        print("No host & port argument given: example '127.0.0.1 7890'")
         exit()
         
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     
-    s.sendto("".encode(), (host, port))
+    s.sendto(b"", (host, port))
+    
     data = s.recv(1024)
-    t = int.from_bytes(data,"big")
+    
+    # decode the data into a integer
+    t = int.from_bytes(data,"big")  
 
 print(f"Received time: {t!r}")
