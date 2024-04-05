@@ -5,12 +5,12 @@ HOST = "127.0.0.1"  # The server's hostname or IP address
 PORT = 7890  # The port used by the server
 
 if __name__ == "__main__":
-    if len(sys.argv) == 3:
-        host = sys.argv[1]
-        port = int(sys.argv[2])
-    else:
-        print("No host & port argument given: example '127.0.0.1 7890'")
-        exit()
+    if len(sys.argv) != 3:
+        print("Usage: tpudpclient <adress> <port>")
+        sys.exit(1)
+
+    host = sys.argv[1]
+    port = int(sys.argv[2])
         
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     
